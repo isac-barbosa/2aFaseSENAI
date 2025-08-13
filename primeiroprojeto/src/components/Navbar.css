@@ -1,0 +1,10 @@
+.navbar-container{
+    background-color: blue;
+    border-radius: 4px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 35px;
+    
+}
