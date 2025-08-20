@@ -4,3 +4,15 @@
     min-height: calc(100vh - 70px);
     
 }
+.imagem-corpo{
+    width: 350px;
+
+
+}
+.button-container{
+    margin: 20px;
+    box-sizing: content-box;
+    color:black;
+    cursor: pointer;
+}
+
