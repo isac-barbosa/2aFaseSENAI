@@ -1,0 +1,25 @@
+CREATE DATABASE empresa_xpto;
+
+USE empresa_xpto;
+
+CREATE TABLE categoria(
+id_categoria INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+descricao VARCHAR(256)
+);
+
+CREATE TABLE fornecedor(
+id_fornecedor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(75),
+nacionalidade VARCHAR(75)
+);
+
+CREATE TABLE peca(
+id_peca INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+nome VARCHAR(75),
+peso DECIMAL(5,3),
+ano_fabricacao DATE, 
+fornecedor_id INT,
+categoria_id INT,
+FOREIGN KEY (fornecedor_id) REFERENCES  fornecedor (id_fornecedor),
+FOREIGN KEY (categoria_id) REFERENCES categoria (id_categoria)
+);

@@ -1,0 +1,31 @@
+CREATE DATABASE escola;
+USE escola;
+
+CREATE TABLE sala(
+id_sala INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_sala VARCHAR(45),
+capacidade_sala INT
+);
+
+CREATE TABLE turma(
+id_turma INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_turma VARCHAR (45),
+periodo VARCHAR(45),
+sala_id_sala INT, 
+FOREIGN KEY (sala_id_sala) REFERENCES sala (id_sala)
+);
+
+CREATE TABLE professor(
+id_professor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_professor VARCHAR(75),
+formacao_professor VARCHAR(100),
+turma_idturma INT,
+FOREIGN KEY (turma_idturma) REFERENCES turma (id_turma)
+);
+
+CREATE TABLE aulas(
+id_aulas INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_aula VARCHAR(45),
+professor_idprofessor INT,
+FOREIGN KEY (professor_idprofessor) REFERENCES professor (id_professor)
+);
