@@ -1,0 +1,62 @@
+CREATE DATABASE estacionamento;
+CREATE TABLE ticket(
+id_ticket INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+codigo_barra INT,
+observacao TEXT
+);
+
+CREATE TABLE estacionamento(
+id_estacionamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(45),
+cnpj BIGINT(14),
+ticket_id INT
+);
+
+
+ALTER TABLE estacionamento
+ADD FOREIGN KEY(ticket_id) REFERENCES ticket (id_ticket);
+
+CREATE TABLE setor(
+id_setor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(45),
+descricao VARCHAR(45),
+estacionamento_id INT,
+FOREIGN KEY (estacionamento_id) REFERENCES estacionamento (id_estacionamento)
+);
+
+CREATE TABLE vaga(
+id_vaga INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+numero_vagas INT,
+setor_id INT,
+FOREIGN KEY(setor_id) REFERENCES setor (id_setor)
+);
+-- para apagar chave estrangeira ⬇️
+ALTER TABLE estacionamento
+DROP FOREIGN KEY estacionamento_ibfk_1;
+
+DROP TABLE ticket;
+-- para adicionar a chave estrangeira ⬇️ 
+ALTER TABLE estacionamento 
+ADD FOREIGN KEY (ticket_id) REFERENCES ticket (id_ticket);
+
+-- para adicionar coluna na tabela que ja existe
+ALTER TABLE ticket
+ADD COLUMN descricao VARCHAR(50);
+
+-- se eu quiser modificar a coluna trocar o varchar pra 100 uso MODIFY, se quiser alterar o tipo de dado tambem usamos ele ⬇️
+ALTER TABLE estacionamento
+MODIFY COLUMN nome VARCHAR(100);
+
+-- Desse jeito para alterar o nome da coluna ⬇️
+ALTER TABLE ticket
+RENAME COLUMN codigo_barra TO codigo; 
+
+
+ALTER TABLE estacionamento
+RENAME TO parking;
+
+-- Isso serve para consultar todos os dados da tabela
+SELECT * FROM setor;
+
+-- Consulta tipos de dados da tabela 
+DESCRIBE setor;
