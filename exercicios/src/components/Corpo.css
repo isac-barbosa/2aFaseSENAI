@@ -1,3 +1,10 @@
 .corpo-container{
-background-color: blue;
+    background-color: gray;
+    box-sizing: border-box;
+}
+.button-container{
+    color: black;
+    scale: 1.5;
+    margin: 40px;
+    cursor: pointer;
 }
