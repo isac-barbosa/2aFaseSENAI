@@ -1,0 +1,16 @@
+.navbar-container{
+    background-color: var(--cor-navbar);
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+.icon-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}

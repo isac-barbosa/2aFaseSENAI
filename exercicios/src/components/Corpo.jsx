@@ -33,3 +33,5 @@ function Corpo(){
 
 
 }
+
+export default Corpo
