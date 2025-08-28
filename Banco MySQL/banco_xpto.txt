@@ -1,0 +1,111 @@
+CREATE DATABASE banco_xpto;
+
+CREATE TABLE tipo_conta(
+cod_tipoconta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+des_tipoconta VARCHAR(100)
+); 
+
+
+CREATE TABLE categoria_cliente(
+cod_categoriacliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_categoriacliente VARCHAR(100)
+);
+
+CREATE TABLE agencia(
+num_agencia INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_agencia VARCHAR(100)
+);
+
+
+CREATE TABLE cliente(
+cod_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_cliente VARCHAR(100),
+cpf BIGINT(11),
+cnpj BIGINT(14),
+num_celular BIGINT(9),
+rua VARCHAR(100),
+numero INT,
+bairro VARCHAR(45),
+cep INT,
+cidade VARCHAR(45),
+estado VARCHAR(45),
+cod_categoria_cliente INT,
+FOREIGN KEY (cod_categoria_cliente) REFERENCES categoria_cliente (cod_categoriacliente)
+);
+
+
+CREATE TABLE conta(
+num_conta INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+val_saldo DECIMAL(10,2),
+cod_tipo_conta INT,
+cod_cliente INT,
+num_agencia INT,
+FOREIGN KEY (cod_tipo_conta) REFERENCES tipo_conta (cod_tipoconta),
+FOREIGN KEY (cod_cliente) REFERENCES cliente (cod_cliente),
+FOREIGN KEY (num_agencia) REFERENCES agencia (num_agencia)
+
+);
+
+ALTER TABLE cliente
+RENAME COLUMN num_celular TO telefone; 
+
+ALTER TABLE categoria_cliente
+ADD COLUMN observacao TEXT;
+
+
+ALTER TABLE cliente
+ADD COLUMN renda DECIMAL(10,2);
+
+ALTER TABLE tipo_conta
+MODIFY COLUMN des_tipoconta TEXT;
+
+
+ALTER TABLE agencia
+MODIFY COLUMN nome_agencia VARCHAR(45);
+
+
+ALTER TABLE cliente 
+DROP COLUMN estado;
+
+ALTER TABLE categoria_cliente
+RENAME TO categoria;
+
+
+ALTER TABLE tipo_conta
+ADD COLUMN observacao TEXT;
+
+
+SELECT * FROM categoria_cliente;
+SELECT * FROM cliente;
+
+-- Populando com uma categoria ⬇️️
+INSERT INTO categoria_cliente
+(nome_categoriacliente)
+VALUES ('Private');
+
+
+-- Populando com mais de uma categoria 
+INSERT INTO categoria_cliente
+(nome_categoriacliente)
+VALUES
+('Personalite'), 
+('Básico');
+
+INSERT INTO categoria_cliente
+(nome_categoriacliente)
+VALUES ('Gold');
+
+
+
+
+INSERT INTO cliente
+(nome_cliente, cpf, rua, cidade, cod_categoria_cliente)
+VALUES
+('anna beatriz', '089234', 'Servidao Lauri de Souza', 'Floripanopolis', 1),
+('isac barbosa', 08291611980, 'Avenida Juscelino K de Oliveira', 'Florianopolis', 1),
+('carlos eduardo', 12353214, 'Rua Professor Egidio Ferreira', 'São José', 4),
+('angelica de souza',79571824534,'Rua Lauro Linhares', 'Florianópolis', 3),
+('igor santos', 89752232, 'Avenida Brasil','São paulo',2 ),
+('luis', 53452342, 'Rua Claudio Schmidt', 'Palhoça',2),
+('luis taylon', 6532234, 'Av Hercilio Luz', 'Balneário', 3),
+('Lucas Silva', 2453112, 'Rua Domingos Cerqueira','Belo Horizonte', 4 );
