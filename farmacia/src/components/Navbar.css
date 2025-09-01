@@ -1,6 +1,6 @@
 .navbar-container{
     background-color: var(--cor-navbar);
-    height: 70px;
+    height: 150px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -11,6 +11,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
     
 
+}
+.navbar-text{
+  text-decoration: none;
+  color: white;
 }

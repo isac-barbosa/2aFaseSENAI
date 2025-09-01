@@ -4,12 +4,14 @@ function Navbar(){
     return(
         <div className='navbar-container'>
            <h4>
-             <img src = "./img/health.svg" className='icon-container'/>
+             <img src = "./img/farmarcia-logo-pq.PNG.png" height= "100" className='icon-container'/>
              FARMÁCIA 
             </h4>
-            <h4> HOME</h4>
-            <h4> SOBRE</h4>
-            <h4> CONTATO</h4>
+           <a className ="navbar-text" href=""><img src="./img/home.svg" className='icon-container' />HOME</a>
+           <a className ="navbar-text" href=""><img src="./img/sobre.svg" className='icon-container' />SOBRE</a>
+           <a  className ="navbar-text" href=""><img src="./img/contact.svg" className='icon-container' />CONTATO</a>
+            
+            
            
 
         </div>
