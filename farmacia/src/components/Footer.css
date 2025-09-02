@@ -1,0 +1,11 @@
+.footer-container{
+    text-align: center;
+    background-color: var(--cor-4);
+    height: 60px;
+    font-variant:normal;
+    color: white;
+}
+.link{
+    text-decoration: none;
+    color: white;
+}
