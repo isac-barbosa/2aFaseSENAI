@@ -1,9 +1,9 @@
 import './Capsula.css'
 function Capsula(){
     return(
-    <div>
+    <div className='card-destaques '>
         <img src="./img/capsula.svg" className="img-destaques" />
-        <h4>MEDICAMENTOS POPULARES</h4>
+        <h4 className='text-destaques'>MEDICAMENTOS POPULARES</h4>
     </div>
 
     )

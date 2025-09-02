@@ -1,11 +1,19 @@
 .footer-container{
     text-align: center;
     background-color: var(--cor-4);
-    height: 60px;
+    height: 80px;
     font-variant:normal;
     color: white;
+    display: flex;
+    justify-content:space-around;
 }
-.link{
+.link {
+    
     text-decoration: none;
     color: white;
+    text-transform:uppercase ;
+}
+.direitos{
+    margin-top: 20px;
+    text-transform:uppercase ;
 }

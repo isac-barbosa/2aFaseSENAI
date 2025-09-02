@@ -1,7 +1,6 @@
 import './Corpo.css'
 import Texto from './Texto'
 import Titulo from './Titulo'
-import Footer from './Footer'
 import Capsula from './Capsula'
 import Atendimento from './Atendimento'
 import Oferta from './Oferta'
@@ -11,16 +10,19 @@ function Corpo(){
         
         <div className='corpo-container'>
             <div className='titulo-container'>
-            <Titulo  titulo = {"SUA FARMARCIA"}/>
+            <Titulo  titulo = {"SUA FARMÁRCIA"}/>
             </div>
-            <Texto className = "texto" textocriado = {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, accusamus! Aliquid ad, aliquam id officia voluptatem praesentium, minima amet fuga reprehenderit accusamus debitis explicabo nam eaque quae, porro quod tempora!"} />
-            <img src="./img/loja.svg" className='img-container' />
+            <div className='conteudo-container'>
+
+            <Texto className = "texto" textocriado = {"Márcia possui formação em administração de empresas, com uma paixão especial por empreendedorismo e design Márcia sempre foi uma pessoa determinada e criativa. Ela cresceu em uma família onde o empreendedorismo era valorizado, inspirada pelo sucesso de seu tio Mário, que administrava uma farmácia local. Depois de se formar na faculdade, Márcia se casou e começou a trabalhar em uma empresa de marketing, onde pôde desenvolver suas habilidades em design e gestão. No entanto, sua vida pessoal deu uma reviravolta quando seu casamento chegou ao fim após um evento no mínimo estranho. Seu marido saiu para comprar cigarros e nunca mais voltou, deixando Márcia sozinha para lidar com a dor do abandono e o desafio de reconstruir sua vida."} />
+            <img src='./img/loja.svg' className='img-container' />
+            </div>
             <div className='destaques-container'>
             <Capsula  className = "destaques-container"  />
             <Atendimento  className = "destaques-container"/>
             <Oferta  className = "destaques-container"/>
             </div>
-            <button> COMPRE AQUI</button>
+            
             
         </div>
 
