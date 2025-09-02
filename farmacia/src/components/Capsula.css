@@ -2,7 +2,7 @@
     text-transform: uppercase;
 }
 .card-destaques {
-  border: 2px solid var(--cor-6); 
+  border: 3px solid var(--cor-1); 
   border-radius: 10px;      
   padding: 10px;           
   display: flex;           
