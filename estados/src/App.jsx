@@ -2,6 +2,9 @@ import { useState } from 'react'
 import './App.css'
 import Venda523 from './components/Venda523'
 import Aluno524 from './components/Aluno524'
+import Porco525 from './components/Porco525'
+import Copo from './components/Copo'
+import Empresa531 from './components/Empresa531'
 
 function App() {
   //Lembrar de não usar variaveis aqui
@@ -46,6 +49,9 @@ function App() {
 
     <Venda523 />
     <Aluno524 />
+    <Porco525 />
+    <Copo />
+    <Empresa531 />
     </>
   )
 }

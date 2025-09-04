@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-
+import './Aluno524.css'
 
 function Aluno524() {
 
@@ -35,7 +35,7 @@ function Aluno524() {
     }
 
   return (
-    <div>
+    <div className="media-container">
         <h2>Alunos</h2>
         <button onClick={calcularmedia}> Calcule sua Media</button>
         {conceito && <p>Pela sua nota você caiu no conceito {conceito} </p>}
