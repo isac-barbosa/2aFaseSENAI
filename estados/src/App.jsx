@@ -11,7 +11,7 @@ function App() {
   //Lembrar de não usar variaveis aqui
 
   const[numero, setNumero] = useState(0)
-  const[username, setUsername] = useState("Juliozao bom de boquetao")
+  const[username, setUsername] = useState("")
 
 
   function incrementar(){

@@ -5,6 +5,8 @@ import './App.css'
 import Inicial from './components/Inicial'
 import Regras from './components/Regras'
 import Temperatura from './components/Temperatura'
+import ConversorDistancia from './components/ConversorDistancia'
+import AnoBissexto from './components/AnoBissexto'
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
     <Inicial />
     <Regras />
     <Temperatura />
+    <ConversorDistancia />
+    <AnoBissexto />
   </>
   )
 }

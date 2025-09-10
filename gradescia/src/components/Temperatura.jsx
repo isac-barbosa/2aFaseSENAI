@@ -2,47 +2,59 @@ import React, { useState } from 'react'
 import './Temperatura.css'
 
 function Temperatura() {
-    const[farenheit, setFarenheit] = useState()
+    const[valor, setValor] = useState()
+    const[entrada, setEntrada] = useState("")
+    const[saida, setSaida] = useState("")
+    const[resultado, setResultado] = useState()
 
     function CalcularTemperatura(){
 
-        let temperatura = Number(prompt("Nos diga primeiro em temperatura você quer converter"))
-        let conversao = Number(prompt("Agora diga para qual você quer converter"))
-        if(temperatura == "celsius" && conversao == "farenheit"){
-            let F = (temperatura * 1.8) + 32
-            alert(F)
-        }
-        else if(temperatura == "farenheit" && conversao == "celsius"){
-            let C = (temperatura - 32) / 1.8
-            alert(C)
-        }
-        else if(temperatura == "celsius" && conversao == "kelvin"){
-            let K = temperatura + 273.15
-            alert(K)
-        }
-        else if(temperatura == "kelvin" && conversao == "celsius"){
-            let KC = temperatura - 273.15
-            alert(KC)
-        }
-        else if(temperatura == "kelvin" && conversao == "farenheit"){
-            let KF = (temperatura - 273.15)* 1.8 + 32
-            alert(KF)
-        }
-        else if(temperatura == "farenheit" && conversao == "kelvin"){
-            let FK = (temperatura - 32) * 5 / 9 + 273.15
-            alert(FK)
-        }
+        let temperatura = Number(valor)
+        let resultado;
+
+        if(entrada == "celsius" && saida == "farenheit") resultado = (temperatura * 1.8) + 32
+         
+        else if(entrada == "farenheit" && saida == "celsius") resultado = (temperatura - 32) / 1.8
+
+        else if(entrada == "celsius" && saida == "kelvin") resultado = temperatura + 273.15
+  
+        else if(entrada == "kelvin" && saida == "celsius") resultado = temperatura - 273.15
+
+        else if(entrada == "kelvin" && saida == "farenheit") resultado = (temperatura - 273.15)* 1.8 + 32
+
+        else if(entrada == "farenheit" && saida == "kelvin") resultado = (temperatura - 32) * 5 / 9 + 273.15
+        
+        setResultado(resultado.toFixed(2));
     }
 
   return (
-    <div>
+    <div className='temp-container'>
         <h1>Temperaturas</h1>
         <label htmlFor="">Converta</label>
         <input type="text"
-        value={farenheit} 
-        onChange={(e) => setFarenheit(e.target.value)}
+        value={valor} 
+        onChange={(e) => setValor(e.target.value)}
         />
-    <button onClick = {CalcularTemperatura}>BLABLA</button>
+        <label>De: </label>
+        <select value={entrada} onChange={(e) => setEntrada(e.target.value)}>
+        <option value="">Selecione a unidade</option>
+        <option value="celsius">Celsius</option>
+        <option value="farenheit">Farenheit</option>
+        <option value="kelvin">Kelvin</option>
+        </select>
+        <label>Para: </label>
+        <select value={saida} onChange={(e) => setSaida(e.target.value)}>
+        <option value="">Selecione a unidade</option>
+        <option value="celsius">Celsius</option>
+        <option value="farenheit">Farenheit</option>
+        <option value="kelvin">Kelvin</option>
+        </select>
+
+        <button onClick = {CalcularTemperatura}>Converter</button>
+
+        {resultado !== undefined && (
+                <h2>Resultado: {resultado} {saida}</h2>
+            )}
     </div>
   )
 }

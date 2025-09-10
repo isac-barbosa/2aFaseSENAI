@@ -1,10 +1,10 @@
-.temp-container{
+.distancia-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 7px;
-    background-color: blue;
+    background-color: #ff0000;
     border-radius: 4px;
     height: 400px;
     margin: 40px;

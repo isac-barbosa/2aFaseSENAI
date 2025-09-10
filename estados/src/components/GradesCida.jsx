@@ -7,6 +7,7 @@ const[inputAltura, setInputAltura] = useState('')
 const[inputLargura, setInputLargura] = useState('')
 const[inputComprimento, setInputComprimento] = useState()
 const [resultado, setResultado] = useState()
+
   function calcularPreco(){
   setResultado((Number(inputLargura) + Number(inputComprimento))
    * 2 * inputAltura * 80)
@@ -31,10 +32,12 @@ const [resultado, setResultado] = useState()
         value = {inputComprimento}
         onChange = {(event) => setInputComprimento(event.target.value)}
         />
-      <button onClick={calcularPreco}> Calcular Preco</button>
+      <button onClick={calcularPreco}> Calcular Preco do Terreno</button>
+      {resultado && <p>O total foi de {resultado} </p>}
       
-    </div>
+     </div>
   )
 }
+
 
 export default GradesCida
