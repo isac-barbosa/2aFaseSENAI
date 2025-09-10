@@ -5,6 +5,7 @@ import Aluno524 from './components/Aluno524'
 import Porco525 from './components/Porco525'
 import Copo from './components/Copo'
 import Empresa531 from './components/Empresa531'
+import GradesCida from './components/GradesCida'
 
 function App() {
   //Lembrar de não usar variaveis aqui
@@ -52,6 +53,7 @@ function App() {
     <Porco525 />
     <Copo />
     <Empresa531 />
+    <GradesCida />
     </>
   )
 }
