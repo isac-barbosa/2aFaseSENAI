@@ -1,10 +1,10 @@
-.ano-container{
+.imc-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 7px;
-    background-color: green;
+    background-color: purple;
     border-radius: 4px;
     height: 400px;
     margin: 40px;

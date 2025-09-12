@@ -10,17 +10,14 @@ function AnoBissexto(){
 
     function CalcularAno(){
         let ano = Number(valor)
-        let resutado;
-            
+        
 
-
-
-
-
-
-
-
-        setResultado(resultado)
+        if((ano % 4 == 0 && ano % 100 !== 0) || ano % 400 == 0){
+            setResultado("Ano bissexto")
+        }
+        else{
+            setResultado("Ano não bissexto")
+        }
     }
     
     return(
@@ -28,12 +25,11 @@ function AnoBissexto(){
         <h2>Ano Bissexto</h2>
         <label htmlFor="">Ano que deseja saber </label>
         <input type="text"
-        value={inputAno} 
-        onChange={(e) => setinputAno(e.target.value)}/>
-
-
+        value={valor} 
+        onChange={(e) => setValor(e.target.value)}/>
 
         <button onClick={CalcularAno}>Calcule o ano bissexto</button>
+        {resultado}
     </div>
    ) 
     

@@ -39,7 +39,7 @@ function Aluno524() {
         <h2>Alunos</h2>
         <button onClick={calcularmedia}> Calcule sua Media</button>
         {conceito && <p>Pela sua nota você caiu no conceito {conceito} </p>}
-
+    
     </div>
   )
 }
