@@ -1,0 +1,138 @@
+CREATE DATABASE livraria2;
+
+CREATE TABLE autor(
+id_autor INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_autor VARCHAR(256) NOT NULL,
+rg_autor BIGINT(11)
+);
+
+
+CREATE TABLE financiador(
+id_financiador INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_financiador VARCHAR(256),
+cnpj_financiador BIGINT(14)
+);
+
+CREATE TABLE cliente(
+id_cliente INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome_cliente VARCHAR(256) NOT NULL,
+rg_cliente BIGINT(11),
+cpf_cliente BIGINT(11) UNIQUE,
+rua_cliente VARCHAR(256),
+bairro_cliente VARCHAR(256),
+pais VARCHAR(70) DEFAULT "Brasil"
+);
+
+CREATE TABLE editora(
+id_editora INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nomefantasia_editora VARCHAR(256),
+razaosocial_editora VARCHAR(256) NOT NULL,
+rua_editora VARCHAR(256),
+bairro_editora VARCHAR(256),
+telefone_editora BIGINT(11),
+nome VARCHAR(256) NOT NULL,
+pais VARCHAR(50) DEFAULT ("Brasil")
+);
+
+CREATE TABLE livro(
+id_livro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+isbn_livro INT,
+titulo_ivro VARCHAR(256),
+preco_livro DECIMAL(8,2),
+categoria_livro ENUM('Horror','Ficção', 'Romance', 'Ação'),
+id_editora INT,
+id_autor INT,
+id_financiador INT,
+FOREIGN KEY (id_editora) REFERENCES editora (id_editora),
+FOREIGN KEY (id_autor) REFERENCES autor (id_autor),
+FOREIGN KEY (id_financiador) REFERENCES financiador (id_financiador)
+);
+
+
+CREATE TABLE pedido(
+id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+qtd_pedido INT CHECK (qtd_pedido >= 0),
+id_livro INT,
+id_cliente INT,
+FOREIGN KEY (id_livro) REFERENCES livro (id_livro),
+FOREIGN KEY (id_cliente) REFERENCES cliente (id_cliente)
+);
+
+INSERT INTO editora
+(nomefantasia_editora, razaosocial_editora, rua_editora, bairro_editora, telefone_editora, nome)
+VALUES
+('Luz do Saber Editora','Luz do Saber Publicações e Editora Ltda','Rua das Letras','Centro','11912345678', 'Saber');
+
+SELECT * FROM editora;
+
+
+INSERT INTO autor
+(id_autor)
+VALUES
+(1);
+
+
+INSERT INTO cliente
+(nome_cliente, rg_cliente, cpf_cliente)
+VALUES
+('Raismanguado',1234567, 112233445566);
+
+INSERT INTO cliente
+(nome_cliente, rg_cliente, cpf_cliente, rua_cliente, bairro_cliente)
+VALUES
+('Donstante',1200567, 112233449966, 'Av das Torres', 'Biguaçu');
+
+SELECT * FROM cliente;
+
+
+INSERT INTO pedido
+(qtd_pedido)
+VALUES
+(-3);
+
+INSERT INTO livro
+(categoria_livro)
+VALUES
+('Comedia');
+
+
+ALTER TABLE livro
+MODIFY COLUMN preco_livro DECIMAL(8,2) CHECK(preco_livro >=0);
+
+ALTER TABLE editora
+DROP COLUMN nomefantasia_editora;
+
+ALTER TABLE financiador
+MODIFY COLUMN nome_financiador VARCHAR(256) DEFAULT 'Financiador Público';  
+
+ALTER TABLE editora
+ADD COLUMN nomefantasia_editora ENUM('A','B','C');
+
+
+INSERT INTO livro
+(isbn_livro, titulo_ivro, preco_livro, categoria_livro)
+VALUES
+('978345678','O Mistério das Estrelas','39.90','Ficção'),
+('978311678','O Rei de Roma', 10,'Ação'),
+('008345699','Senhor dos Aneis', 180,'Ficção');
+
+SELECT * FROM livro;
+
+INSERT INTO editora
+(razaosocial_editora, rua_editora, bairro_editora, telefone_editora,nome, pais, nomefantasia_editora)
+ VALUES
+('Luz do Saber Publicações e Editora Ltda.', 'Rua das Letras', 'Centro', '11912345678','Saber das luzes','Brasil', 'B'),
+('Horizonte Aberto Comunicação e Editoração S.A.', 'Avenida das Nações', 'Asa Norte', '61998765432', 'Aberto Comunicação','Portugal', 'A'),
+('Sabiá Publicações Culturais Ltda.', 'Avenida das Palmeiras', 'Boa Viagem', '81987776655','Sabiá','Holanda','C');
+
+SELECT * FROM editora;
+
+INSERT INTO financiador
+(cnpj_financiador)
+VALUES
+(9988331184),
+(5278091601), 
+(3290687276);
+
+SELECT * FROM financiador
+
