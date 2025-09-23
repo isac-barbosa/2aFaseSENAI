@@ -1,0 +1,114 @@
+CREATE DATABASE estacionamento_shopping;
+
+CREATE TABLE categoria(
+id_categoria INT PRIMARY KEY,
+nome VARCHAR(256),
+descricao VARCHAR(256)
+);
+
+CREATE TABLE cliente(
+id_cliente INT  PRIMARY KEY,
+nome VARCHAR(256),
+data_nascimento DATE
+);
+
+CREATE TABLE veiculo(
+id_veiculo INT PRIMARY KEY,
+placa VARCHAR(256),
+cor VARCHAR(256),
+cliente_id INT,
+categoria_id INT,
+FOREIGN KEY (cliente_id) REFERENCES cliente (id_cliente),
+FOREIGN KEY (categoria_id) REFERENCES categoria (id_categoria)
+);
+
+CREATE TABLE estacionamento(
+id_edtacionamento INT PRIMARY KEY,
+nome VARCHAR(256),
+capacidade BIGINT,
+data_entrada DATE,
+data_saida DATE,
+horario_entrada TIME,
+horario_saida TIME,
+veiculo_id INT,
+FOREIGN KEY (veiculo_id) REFERENCES veiculo (id_veiculo)
+);
+
+INSERT INTO cliente
+(id_cliente, nome, data_nascimento)
+VALUES
+(1,'Isac', '2008-04-02'),
+(2,'Amaral','1976-12-26'),
+(3,'Rogeria','1986-07-30');
+
+
+INSERT INTO categoria
+(id_categoria, nome, descricao)
+VALUES
+(1,'Utilitário',' veículo versátil projetado para o transporte de pessoas e/ou cargas'),
+(2,'Van',' mais alto que um carro, usado para transporte de mercadorias ou passageiros,'),
+(3,'Pick-up','caracterizado por uma cabine fechada para passageiros e uma parte traseira aberta com uma caçamba de carga, separada da cabine');
+
+
+INSERT INTO veiculo
+(id_veiculo, placa, cor, cliente_id, categoria_id)
+VALUES
+(1,'AAA-2020','Preto', 1, 2),
+(2,'BBB-1111','Branco',1 , 3),
+(3,'CCC-5050','Azul', 2, 3),
+(4,'DDD-1234','Branco',1 , 2);
+
+INSERT INTO veiculo
+(id_veiculo, placa, cor)
+VALUES
+(5,'RRR-2525','Azul');
+
+
+INSERT INTO estacionamento
+(id_edtacionamento, nome, capacidade, data_entrada, data_saida, horario_entrada, horario_saida)
+VALUES
+(1,'Stop Parking',250 ,'2025-09-02','2025-09-02','12:00:00','20:21:10' ),
+(2,'Estacionamento Continente', 420,'2025-04-08','2025-04-09','17:25:19','17:48:00'),
+(3, 'Estacionamento J',90 ,'2025-10-27','2025-10-27','19:34:12','22:12:56');
+
+
+SELECT * FROM veiculo
+JOIN categoria
+ON veiculo.categoria_id = categoria.id_categoria
+JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente;
+
+SELECT 
+veiculo.id_veiculo,
+veiculo.placa,
+veiculo.cor,
+veiculo.cliente_id,
+veiculo.categoria_id
+FROM veiculo
+LEFT JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente;
+
+SELECT veiculo.*, categoria.* FROM veiculo
+RIGHT JOIN categoria
+ON veiculo.categoria_id = categoria.id_categoria;
+
+-- Utilizando FULL junção dos dois ⬇️
+SELECT veiculo.*, cliente.* FROM veiculo LEFT JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente
+UNION
+SELECT veiculo.*, cliente.* FROM veiculo RIGHT JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente;
+
+
+
+SELECT veiculo.id_veiculo, veiculo.placa AS placa_registrada, veiculo.cor, cliente.nome AS nome_do_cliente FROM veiculo
+JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente;
+
+CREATE VIEW vw_veiculo_cliente AS
+SELECT veiculo.id_veiculo, veiculo.placa AS placa_registrada, veiculo.cor, cliente.nome AS nome_do_cliente FROM veiculo
+JOIN cliente
+ON veiculo.cliente_id = cliente.id_cliente;
+
+
+SELECT * FROM vw_veiculo_cliente;
