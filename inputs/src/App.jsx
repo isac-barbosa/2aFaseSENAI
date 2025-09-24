@@ -5,6 +5,9 @@ import Temperatura from './components/Temperatura'
 import ConversorDistancia from './components/ConversorDistancia'
 import AnoBissexto from './components/AnoBissexto'
 import CalculadoraIMC from './components/CalculadoraIMC'
+import TrajetoPomar from './components/TrajetoPomar'
+import Pneu from './components/Pneu'
+import Aluno from './components/Aluno'
 
 function App() {
 
@@ -19,6 +22,9 @@ function App() {
     <ConversorDistancia />
     <CalculadoraIMC />
     <AnoBissexto />
+    <TrajetoPomar />
+    <Pneu />
+    <Aluno />
   </>
   )
 }
