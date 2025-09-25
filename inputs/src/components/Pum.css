@@ -1,11 +1,12 @@
-.pneu-container{
+.pum-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     border: 4px solid ;
-    background-color: #00ddff71;
+    background-color: #19f500a8;
     border-radius: 4px;
     height: 400px;
     margin: 40px;
+
 }

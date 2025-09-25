@@ -8,6 +8,10 @@ import CalculadoraIMC from './components/CalculadoraIMC'
 import TrajetoPomar from './components/TrajetoPomar'
 import Pneu from './components/Pneu'
 import Aluno from './components/Aluno'
+import Bondinho from './components/Bondinho'
+import Pum from './components/Pum'
+import Combustiveis from './components/Combustiveis'
+
 
 function App() {
 
@@ -25,6 +29,9 @@ function App() {
     <TrajetoPomar />
     <Pneu />
     <Aluno />
+    <Bondinho />
+    <Pum />
+    <Combustiveis />
   </>
   )
 }
