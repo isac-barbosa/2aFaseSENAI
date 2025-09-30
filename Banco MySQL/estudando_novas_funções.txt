@@ -1,0 +1,105 @@
+CREATE DATABASE estacionamento_xpto;
+
+CREATE TABLE estacionamento(
+id_estacionamento INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+capacidade BIGINT,
+subsolo ENUM('Sim','Não'),
+especial ENUM('Sim ','Não') 
+);
+
+INSERT INTO estacionamento
+(nome, capacidade, subsolo, especial)
+VALUES
+('Estacionamento A','20','Não','Não'),
+('Estacionamento B','35','Sim','Sim'),
+('Estacionamento C','40','Sim','Sim'),
+('Estacionamento D','50','Sim','Sim'),
+('Estacionamento E','15','Sim','Não'),
+('Estacionamento F','85','Sim','Sim'),
+('Estacionamento G','100','Não','Não');
+
+-- Utilizando desta forma pra filtar da forma que o exercicio pede ⬇️
+SELECT nome,capacidade FROM estacionamento
+WHERE capacidade >= 20 AND capacidade <=40 AND subsolo = 'Sim' AND especial = 'Sim'
+-- Utilizei assim para deixar em ordem crescente ASC = ascendente ou seja crescente 
+-- se precisasse ser decrescente seria DESC
+ORDER BY capacidade ASC;
+
+
+SELECT nome, capacidade FROM estacionamento
+WHERE capacidade > 50
+ORDER BY  capacidade DESC;
+
+
+SELECT nome, capacidade FROM estacionamento
+WHERE capacidade > 80 || nome = 'Estacionamento B';
+
+SELECT id_estacionamento, nome, capacidade, subsolo, especial FROM estacionamento
+WHERE subsolo = 'Sim' AND especial = 'Sim';
+
+
+CREATE TABLE cliente(
+id_cliente INT NOT NULL PRIMARY KEY,
+nome VARCHAR(45)
+);
+
+CREATE TABLE mensalidade(
+id_mensalidade INT NOT NULL PRIMARY KEY,
+cliente_id  INT NOT NULL,
+valor DECIMAL(5,2),
+status_pagamento VARCHAR(100),
+FOREIGN KEY (cliente_id) REFERENCES cliente (id_cliente)
+);
+
+INSERT INTO cliente
+(id_cliente, nome)
+VALUES
+('1','José'),
+('2','Carlos'),
+('3','Marcos');
+
+INSERT INTO mensalidade
+(id_mensalidade, cliente_id, valor, status_pagamento)
+VALUES
+('1','1','650.00','Fatura paga'),
+('2','2','670.00','Fatura paga'),
+('3','3','690.00','Fatura paga'),
+('4','1','720.00','Em débito'),
+('5','2','740.00','Em débito'),
+('6','3','760.00','Em débito'),
+('7','3','800.00','Em débito');
+
+SELECT * FROM mensalidade;
+SELECT * FROM cliente;
+
+-- Ele serve para contar neste caso quantos status de pagamento existem ⬇️
+SELECT count(mensalidade.status_pagamento) AS contagem_mensalidades FROM mensalidade;
+
+
+-- Para saber a quantidade de mensalidades por cliente precisei usar o JOIN para juntar a tabela cliente e 
+-- a tabela mensalidade e utilizei o GROUP BY para agrupar
+SELECT cliente.nome, count(mensalidade.status_pagamento) FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome;
+
+-- Utilizei o sum para somar o valor de mensalidades por cliente
+SELECT cliente.nome, sum(mensalidade.valor) AS Somatorio_Mensalidades FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome;
+
+
+-- Para saber media so valor de mensalidade existentes por cada cliente
+SELECT cliente.nome, avg(mensalidade.valor) AS Media_Mensalidades FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+GROUP BY cliente.nome;
+
+-- Soma do valor de mensalidades (EM DÉBITO) por cada cliente ⬇️
+SELECT cliente.nome, sum(mensalidade.valor) FROM mensalidade
+JOIN cliente
+ON cliente.id_cliente = mensalidade.cliente_id
+WHERE mensalidade.status_pagamento = 'Em débito'
+GROUP BY cliente.nome
