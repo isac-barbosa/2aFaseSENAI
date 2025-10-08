@@ -1,0 +1,15 @@
+.nav-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    background-color: rgb(154, 132, 253);
+    height: 40px;
+    
+
+}
+.links{
+    text-decoration: none;
+    color: rgb(64, 1, 238);
+    
+}

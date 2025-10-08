@@ -1,8 +1,13 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
 
 function Pagina2() {
   return (
-    <div>Pagina2</div>
+    <div>
+      <Navbar/>
+      Pagina2
+
+    </div>
   )
 }
 
