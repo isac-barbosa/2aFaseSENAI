@@ -4,6 +4,7 @@
     align-items: flex-start;
     padding: 40px 80px;
     background-color: var(--cor-2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 
@@ -42,6 +43,7 @@
     text-align: left;
     line-height: 1.6;
     margin-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .conteudo-container{
     display: flex;

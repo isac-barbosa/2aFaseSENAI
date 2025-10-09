@@ -7,25 +7,36 @@ function Home() {
     <div >
       <Navbar />
       <div className='home-container'>
-        <h2>Bem vindo ao Tião Empreendimentos</h2>
-        <h4> 
+        <h1>Bem vindo ao Tião Empreendimentos</h1>
+        <h2> 
         Aqui você encontra:
-        </h4>
+        </h2>
         <ul>
           <li>
-          Petisco e bebidas 
+          <h4>Petisco e bebidas </h4>
             </li>
             <li>
-          Sorvetes de todos os gostos
+          <h4>Sorvetes de todos os gostos</h4>
             </li>
             <li>
-           Serviços de Borracharia
+           <h4>Serviços de Borracharia</h4>
             </li>
            
         </ul>
           
 
-          <img  className='imgs' src="./img/bar.png" />
+          <img className='imgs' src="./img/bar.png" />
+          <div className='sorveteria-container'>
+          <img className='imgs'src="./img/sorveteria.png" />
+          <div className='cards-container'>
+            <h3 className='subtitulos'>Sorveteria deliciosa</h3>
+            <p className='text'>
+              Depois de um longo dia (ou da melhor rodada de cerveja), nada como um doce conforto. 
+              Nossos sorvetes seguem receitas tradicionais, preparadas com o carinho e a simplicidade dos velhos tempos. 
+              Sabores cremosos que te transportam direto para a infância.
+              </p>
+          </div>
+          </div>
 
           </div>
       </div>
