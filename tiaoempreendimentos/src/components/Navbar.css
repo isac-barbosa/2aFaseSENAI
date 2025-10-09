@@ -1,0 +1,18 @@
+.navbar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    background-color: var(--cor-4);
+    height: 40px;
+}
+.links{
+    text-decoration: none;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    cursor: pointer;
+    
+}
+.links :hover{
+    scale: 1.5px;
+}

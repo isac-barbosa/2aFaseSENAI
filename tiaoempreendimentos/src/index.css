@@ -1,0 +1,12 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+:root{
+  --cor-1: #4db8438a;
+  --cor-2: #008000;
+  --cor-3: #deda0d;
+  --cor-4: #0E1288;
+}

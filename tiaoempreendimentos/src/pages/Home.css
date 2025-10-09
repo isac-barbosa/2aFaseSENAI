@@ -1,0 +1,18 @@
+.home-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.imgs{
+    height: 250px;
+    border: solid 2.5px var(--cor-4);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+    box-shadow: 20px;
+}
