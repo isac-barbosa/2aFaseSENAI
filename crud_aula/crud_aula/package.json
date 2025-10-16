@@ -1,9 +1,7 @@
 {
   "scripts": {
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js "
   },
-
-
   "dependencies": {
     "express": "^5.1.0",
     "mysql2": "^3.15.2"
