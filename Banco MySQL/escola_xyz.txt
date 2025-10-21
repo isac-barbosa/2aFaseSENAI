@@ -1,0 +1,130 @@
+CREATE DATABASE escola_xyz;
+
+CREATE TABLE aluno(
+id_aluno INT NOT NULL PRIMARY KEY,
+nome VARCHAR(256)
+);
+
+CREATE TABLE curso(
+id_curso INT NOT NULL PRIMARY KEY,
+nome VARCHAR(256),
+duracao INT
+);
+
+CREATE TABLE inscricao(
+id_inscricao INT NOT NULL PRIMARY KEY,
+dt_inscricao DATE,
+aluno_id INT,
+curso_id INT,
+FOREIGN KEY (curso_id) REFERENCES curso (id_curso),
+FOREIGN KEY (aluno_id) REFERENCES aluno (id_aluno)
+);
+
+CREATE TABLE mensalidade(
+id_mensalidade INT NOT NULL PRIMARY KEY,
+inscricao_id INT,
+dt_vencimento DATE,
+valor DECIMAL(8,2),
+status_pagamento ENUM("Pago", "Não pago") 
+);
+
+
+INSERT INTO aluno
+(id_aluno, nome)
+VALUES
+('1','Isac'),
+('2','Sebasthian'),
+('3','Anna Beatriz'),
+('4','João Pedro'),
+('5','Igor');
+
+INSERT INTO curso
+(id_curso, nome, duracao)
+VALUES
+('1','Física','120'),
+('2','Filosofia','40'),
+('3','Biologia','65'),
+('4','Química','100'),
+('5','Matemática','80');
+
+
+INSERT INTO inscricao
+(id_inscricao, dt_inscricao, aluno_id, curso_id)
+VALUES
+('1','2020-01-02','4','4'),
+('2','2020-01-02','3','3'),
+('3','2020-01-02','2','2'),
+('4','2020-06-02','4','4'),
+('5','2020-06-02','3','3'),
+('6','2020-06-02','2','2');
+
+
+INSERT INTO inscricao
+(id_inscricao, dt_inscricao)
+VALUES
+('7','2020-06-02');
+
+INSERT INTO mensalidade
+(id_mensalidade, dt_vencimento, valor, status_pagamento, inscricao_id)
+VALUES
+('1','2020-01-10','550','Pago','1'),
+('2','2020-01-10','540','Pago','2'),
+('3','2020-01-10','530','Pago','3'),
+('4','2020-06-10','580','Não Pago','4'),
+('5','2020-06-10','570','Não Pago','5'),
+('6','2020-06-10','560','Não Pago','6');
+
+SELECT * FROM aluno;
+SELECT * FROM inscricao;
+SELECT * FROM curso;
+SELECT * FROM mensalidade;
+
+-- Utilizei deste jeito para conseguir buscar o nome dos alunos e a soma das mensalidades mesmo não tendo relação entre as tabelas
+--  mesmo não tendo relação entre as tabelas por isso utilizei 2 JOINS
+SELECT aluno.id_aluno, aluno.nome, sum(mensalidade.valor) AS Soma_mensalidades FROM aluno
+JOIN inscricao ON aluno.id_aluno = inscricao.aluno_id
+JOIN mensalidade ON inscricao.id_inscricao = mensalidade.inscricao_id
+GROUP BY aluno.nome, aluno.id_aluno;
+
+
+-- Soma de todas as mensalidades com status 'Não Pago'
+SELECT sum(mensalidade.valor) AS Mensalidades_Nao_Pagas FROM mensalidade
+JOIN inscricao ON inscricao.id_inscricao = mensalidade.inscricao_id
+JOIN aluno ON aluno.id_aluno = inscricao.aluno_id
+WHERE status_pagamento = 'Não pago'
+GROUP BY aluno.nome;
+
+
+
+-- Fiz desta forma para conseguir a média da mensalidade traznedo o nome do aluno, mais uma vez utilizando 2 JOINS
+-- por conta que as tabelas não tem relação  
+SELECT aluno.nome, avg(mensalidade.valor) AS Media_mensalidade FROM mensalidade
+JOIN inscricao ON inscricao.id_inscricao = mensalidade.inscricao_id
+JOIN aluno ON aluno.id_aluno = inscricao.aluno_id
+GROUP BY aluno.nome;
+
+-- Utilizei assim para pegar o valor maximo
+SELECT max(mensalidade.valor) AS Valor_Maximo_Mensalidade FROM mensalidade;
+
+-- E assim o valor mínimo
+SELECT min(mensalidade.valor) AS Valor_Minimo_Mensalidade FROM mensalidade;
+
+-- Precisei utilizar assim para pegar o valor minimo da mensalidade não paga 
+SELECT min(mensalidade.valor) FROM mensalidade 
+WHERE status_pagamento = "Não Pago";
+
+-- Exibindo o nome dos alunos sem duplicar 
+SELECT aluno.nome FROM aluno
+GROUP BY aluno.nome;
+
+-- Soma das mensalidades anterior a 10/06/2020
+SELECT sum(mensalidade.valor) FROM mensalidade
+WHERE dt_vencimento < '2020-06-10';
+
+-- Soma das mensalidades posterior a 09/06/2020
+SELECT sum(mensalidade.valor) FROM mensalidade
+WHERE dt_vencimento > '2020-06-09';
+
+-- Somatorio das mensalidades entre id_mensalidade 2 e id_mensalidade 5
+SELECT sum(mensalidade.valor) FROM mensalidade
+WHERE id_mensalidade  BETWEEN 2 AND 5;
