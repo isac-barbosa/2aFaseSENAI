@@ -1,0 +1,23 @@
+CREATE DATABASE Aprendendo_TRIGGER;
+
+CREATE TABLE produto(
+id_produto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(256),
+preco DECIMAL(8.2),
+estoque INT
+);
+
+CREATE TABLE pedido(
+id_pedido INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+data_horario DATETIME,
+quantidade INT,
+produto_id INT,
+FOREIGN KEY (produto_id) REFERENCES produto (id_produto)
+);
+
+INSERT INTO produto
+(nome,preco,estoque)
+VALUES
+('caderno','19.00','200'), 
+('caneta','5.00','500'),
+('lápis','3.00','1000');
