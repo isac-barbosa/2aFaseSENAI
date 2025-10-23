@@ -34,6 +34,7 @@ function App() {
                 nome: inputNome,
                 endereco: inputEndereco,
                 email: inputEmail,
+                
                 telefone: inputTelefone
             };
             const response = await axios.post('http://localhost:3000/clientes', cliente);
