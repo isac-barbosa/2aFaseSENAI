@@ -1,0 +1,49 @@
+CREATE DATABASE posto_gasolina;
+
+
+CREATE TABLE posto(
+id_posto INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+preco_litro DECIMAL(5,2) DEFAULT 6.50,
+estoque INT CHECK (estoque > 0)
+);
+
+CREATE TABLE veiculo(
+id_veiculo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+quantidade_abastecimento INT,
+placa VARCHAR(8),
+posto_id INT,
+FOREIGN KEY (posto_id) REFERENCES posto (id_posto)
+);
+
+INSERT INTO posto
+(estoque)
+VALUES
+(1000),
+(750),
+(200);
+
+
+SELECT * FROM posto;
+SELECT * FROM veiculo;
+
+
+DELIMITER %%
+CREATE TRIGGER estoque_gasolina
+AFTER INSERT ON veiculo
+FOR EACH ROW
+BEGIN
+UPDATE posto
+SET posto.estoque = posto.estoque - new.quantidade_abastecimento
+WHERE posto.id_posto = new.posto_id;
+END;
+%%
+
+INSERT INTO veiculo
+(quantidade_abastecimento, placa, posto_id)
+VALUES
+(120, 'PXV-1E49', 1),
+(100, 'MWQ-7L02', 2),
+(600, 'RAQ-2P67', 3);
+
+
+
