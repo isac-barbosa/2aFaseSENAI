@@ -26,26 +26,38 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#ffffff", en
     margin: 40px;
     /* box-shadow: 20px; */
 }
-.sorveteria-container{
+.bar-container{
     display: flex;
     align-items: center;
     justify-content: center; 
     margin: 40px 0;
 }
+.sorveteria-container{
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    margin: 40px 0;
+    border-radius: 20px;
+    background-color: #1760186b;
+}
 .cards-container{
     border-radius: 8px;
-    background-color: #176018;
     color: rgb(255, 255, 255);
-    min-height: 180px;
-    max-width: 380px;
+    min-height: 290px;
+    max-width: 500px;
     gap: 40px;
+   
 }
 .subtitulos{
     color: #ffffff;
     text-align: center;
     margin-bottom: 5px;
+    margin-top: 10px;
 }
 .text{
     text-transform: lowercase;
     text-align: center;
+}
+.subtitulos{
+    color: #97e199;
 }
