@@ -1,0 +1,41 @@
+html{
+    height: 100%;
+}
+
+body{
+    height: 100%;
+    margin: 0;
+}
+
+#container{
+    height: 100%;
+    background-color: red;
+}
+#top{
+    height: 20%;
+    background-color: rgb(251, 0, 0);
+}
+#mid{
+    height: 65%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: space-around;
+}
+#mid-left{
+    height: 100%;
+    width: 40%;
+    background-color: rgb(0, 165, 94);
+}
+#mid-right{
+    height: 100%;
+    width: 60%;
+    background-color: rgb(240, 252, 3);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+#bottom{
+    height: 15%;
+    background-color: blue;
+}
