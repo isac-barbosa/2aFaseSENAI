@@ -1,0 +1,91 @@
+CREATE DATABASE estudando_procedure;
+
+CREATE TABLE dados_estudantes(
+id_estudante INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+data_nascimento DATE,
+unidade_curricular ENUM('Física', 'Biologia')
+);
+
+INSERT INTO dados_estudantes
+(nome, data_nascimento, unidade_curricular)
+VALUES
+('Isac','2008-04-02','Física'),
+('Lucas','2006-09-30','Biologia'),
+('Igor','2007-12-03','Física');
+
+SELECT * FROM dados_estudantes;
+
+DELIMITER //
+CREATE PROCEDURE estudante_select(pesquisa_id INT)
+BEGIN
+SELECT * FROM dados_estudantes
+WHERE id_estudante = pesquisa_id;
+END
+//
+CALL estudante_select(1);
+
+SHOW PROCEDURE STATUS;
+
+SHOW CREATE PROCEDURE estudante_select
+
+DROP PROCEDURE estudante_select
+
+
+CREATE TABLE estudante(
+id_estudante INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+matricula INT,
+curso VARCHAR(100),
+cidade VARCHAR(100)
+);
+
+INSERT INTO estudante
+(nome, matricula, curso, cidade)
+VALUES
+('Beatriz', 1,'Química','Florianópolis');
+
+
+SELECT * FROM estudante
+
+DELIMITER !!
+CREATE PROCEDURE select_dados( id_atualiza1 INT, nomeA VARCHAR(100), matriculaA INT, cursoA VARCHAR(100), cidadeA VARCHAR(100))
+BEGIN
+UPDATE estudante
+SET nome = nomeA, matricula = matriculaA, curso = cursoA, cidade = cidadeA
+WHERE id_estudante = id_atualiza1;
+SELECT * FROM estudante;
+END
+!!
+
+CALL select_dados (2,'nome4', 400, 'curso4', 'cidade4');
+
+DROP TABLE estudante;
+
+DROP PROCEDURE select_dados
+
+
+DELIMITER $$
+CREATE PROCEDURE delete_estudante(estudante_excluido INT)
+BEGIN
+DELETE FROM estudante
+WHERE id_estudante = estudante_excluido;
+SELECT * FROM estudante; 
+END
+$$
+
+CALL delete_estudante(1);
+
+DELIMITER **
+CREATE PROCEDURE return_qtd(qtd_cadastro VARCHAR(100))
+BEGIN
+SELECT count(estudante.curso) FROM estudante
+GROUP BY estudante.id_estudante
+WHERE id_estudante = qtd_cadastro;
+END
+**
+
+CALL return_qtd('Química');
+
+
+DROP PROCEDURE return_qtd
