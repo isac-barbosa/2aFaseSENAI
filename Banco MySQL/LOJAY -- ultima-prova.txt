@@ -1,0 +1,106 @@
+CREATE DATABASE LOJAY;
+
+CREATE TABLE representante(
+id_representante INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+cnpj BIGINT(14) UNIQUE
+);
+
+CREATE TABLE produto(
+id_produto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+nome VARCHAR(100),
+codigo VARCHAR(100),
+estoque INT
+);
+
+CREATE TABLE compra(
+id_compra INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+data_horario DATETIME,
+quantidade INT, 
+produto_id INT,
+representante_id INT,
+FOREIGN KEY (produto_id) REFERENCES produto (id_produto),
+FOREIGN KEY (representante_id) REFERENCES representante (id_representante)
+);
+
+
+INSERT INTO produto
+ (nome, codigo, estoque) 
+ VALUES
+('Camiseta', '01', 50),
+('Calça Jeans', '02', 40),
+('Tênis', '03', 30),
+('Boné', '04', 20),
+('Jaqueta', '05', 25);
+
+
+INSERT INTO representante 
+(nome, cnpj)
+VALUES
+('Carlos Souza', '11223344556677'),
+('Ana Lima', '22334455667788'),
+('João Ribeiro', '33445566778899');
+
+SELECT nome, estoque AS estoque_maximo
+FROM produto
+WHERE estoque = (SELECT MAX(estoque) FROM produto);
+
+
+SELECT nome, estoque AS estoque_minimo
+FROM produto
+WHERE estoque = (SELECT MIN(estoque) FROM produto);
+
+SELECT nome, estoque 
+FROM produto 
+WHERE id_produto = 1;
+
+DELIMITER $$
+CREATE TRIGGER reduz_estoque
+BEFORE INSERT ON compra
+FOR EACH ROW
+BEGIN
+    UPDATE produto
+    SET estoque = estoque - NEW.quantidade
+    WHERE id_produto = NEW.produto_id;
+END 
+$$
+
+SHOW TRIGGERS;
+
+
+INSERT INTO compra 
+(data_horario, quantidade, produto_id, representante_id)
+ VALUES
+('2025-01-10 14:30:00', 5, 1, 1),
+('2025-01-11 10:00:00', 3, 2, 1);
+
+INSERT INTO compra 
+(data_horario, quantidade, produto_id, representante_id) 
+VALUES
+('2025-01-12 13:20:00', 4, 3, 2),
+('2025-01-13 09:45:00', 2, 4, 2);
+
+INSERT INTO compra 
+(data_horario, quantidade, produto_id, representante_id) 
+VALUES
+('2025-01-14 16:00:00', 3, 5, 3),
+('2025-01-15 15:10:00', 1, 1, 3);
+
+-- verificando se a trigger deu certoo
+SELECT nome, estoque 
+FROM produto 
+WHERE id_produto = 1;
+
+-- criação da view
+CREATE VIEW view_media_compra AS
+SELECT AVG(quantidade) AS media_quantidades
+FROM compra;
+
+SELECT * FROM view_media_compra;
+
+-- Trazendo os nomes sem duplicar
+SELECT DISTINCT nome
+FROM representante
+GROUP BY nome;
+
+
